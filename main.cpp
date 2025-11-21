@@ -30,6 +30,15 @@ void work() {
         return 0;
     });
 
+    quick("A");
+    slow("B1");
+
+    fut_B2B3.get();
+    quick("C1");
+
+    fut_C2.get();
+    quick("D");
+
     auto t1 = clock::now();
     auto elapsed = std::chrono::duration<double>(t1 - t0).count();
 
