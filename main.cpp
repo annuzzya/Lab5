@@ -9,8 +9,9 @@ using namespace std::chrono_literals;
 
 void compute(const std::string& name, std::chrono::seconds duration) {
     std::this_thread::sleep_for(duration);
-    std::cout << name << '\n';
+    std::osyncstream(std::cout) << name << '\n';
 }
+
 void slow(const std::string& name)  { compute(name, 7s); }
 void quick(const std::string& name) { compute(name, 1s); }
 
@@ -42,9 +43,11 @@ void work() {
     auto t1 = clock::now();
     auto elapsed = std::chrono::duration<double>(t1 - t0).count();
 
-    std::cout << "Elapsed (s): " << elapsed << '\n';
+    std::osyncstream(std::cout) << "Elapsed (s): " << elapsed << '\n';
+    std::osyncstream(std::cout) << "Work is done!" << '\n';
 }
 
 int main() {
+    work();
     return 0;
 }
